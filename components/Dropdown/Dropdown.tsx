@@ -16,6 +16,7 @@ const sportsData: OptionType[] = [
   { label: "Archery", value: "archery", isCategory: true },
   {
     label: "Archery Clubs",
+    value: "archery_clubs", // ✅ Added value to avoid Vercel build error
     options: [
       { label: "Armidale Archers", value: "armidale_archers", parentSport: "Archery" },
       { label: "Bellingen Archers", value: "bellingen_archers", parentSport: "Archery" },
@@ -25,6 +26,7 @@ const sportsData: OptionType[] = [
   { label: "Golf", value: "golf", isCategory: true },
   {
     label: "Golf Clubs",
+    value: "golf_clubs", // ✅ Added value
     options: [
       { label: "Sydney Golf Club", value: "sydney_golf_club", parentSport: "Golf" },
       { label: "Wollombi Archibald Golf Club", value: "wollombi_archibald_golf_club", parentSport: "Golf" },
@@ -33,13 +35,14 @@ const sportsData: OptionType[] = [
   { label: "Tennis", value: "tennis", isCategory: true },
   {
     label: "Tennis Clubs",
+    value: "tennis_clubs", // ✅ Added value
     options: [{ label: "Melbourne Tennis Academy", value: "melbourne_tennis", parentSport: "Tennis" }],
   },
 ];
 
 // ✅ Function to filter sports and clubs
 const filterOptions = (inputValue: string, mounted: boolean): OptionType[] => {
-  if (!mounted) return []; // ✅ Prevent hydration mismatch
+  if (!mounted) return [];
 
   if (!inputValue) {
     return sportsData.filter((option) => option.isCategory);
@@ -53,7 +56,7 @@ const filterOptions = (inputValue: string, mounted: boolean): OptionType[] => {
         club.label.toLowerCase().includes(inputValue.toLowerCase())
       );
 
-      return { label: sport.label, options: matchingClubs || [] };
+      return { ...sport, options: matchingClubs || [] };
     })
     .filter((group) => group.options?.length || group.isCategory);
 };
@@ -86,7 +89,7 @@ const SportsDropdown = ({ style = {} }: { style?: React.CSSProperties }) => {
         classNamePrefix="select"
         value={selectedOption}
         onChange={(option) => setSelectedOption(option || null)}
-        options={filterOptions(inputValue, mounted)} // ✅ Ensures filtering runs only after mount
+        options={filterOptions(inputValue, mounted)}
         onInputChange={(value) => setInputValue(value)}
         getOptionLabel={(e) => (e.parentSport ? `${e.label}` : e.label)}
         placeholder="Search by Sport or Club"
