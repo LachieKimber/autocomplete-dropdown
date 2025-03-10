@@ -4,7 +4,15 @@ import React, { useState, useEffect } from "react";
 import Select, { components } from "react-select";
 import styles from "./Dropdown.module.scss"; // ✅ Import SCSS module
 
-const sportsData = [
+interface OptionType {
+  label: string;
+  value: string;
+  isCategory?: boolean;
+  options?: OptionType[];
+  parentSport?: string;
+}
+
+const sportsData: OptionType[] = [
   { label: "Archery", value: "archery", isCategory: true },
   {
     label: "Archery Clubs",
@@ -29,48 +37,48 @@ const sportsData = [
   },
 ];
 
-// ✅ Fix: Prevent hydration mismatch by rendering only after mounting
-const SportsDropdown = ({ style = {} }: { style?: any }) => {
-  const [selectedOption, setSelectedOption] = useState(null);
-  const [inputValue, setInputValue] = useState("");
-  const [mounted, setMounted] = useState(false);
+// ✅ Function to filter sports and clubs
+const filterOptions = (inputValue: string, mounted: boolean): OptionType[] => {
+  if (!mounted) return []; // ✅ Prevent hydration mismatch
+
+  if (!inputValue) {
+    return sportsData.filter((option) => option.isCategory);
+  }
+
+  return sportsData
+    .map((sport) => {
+      if (sport.isCategory) return sport;
+
+      const matchingClubs = sport.options?.filter((club) =>
+        club.label.toLowerCase().includes(inputValue.toLowerCase())
+      );
+
+      return { label: sport.label, options: matchingClubs || [] };
+    })
+    .filter((group) => group.options?.length || group.isCategory);
+};
+
+// ✅ Custom Clear Button
+const ClearIndicator = (props: any) => {
+  const { children = "×", getStyles, innerRef, innerProps } = props;
+  return (
+    <div {...innerProps} ref={innerRef} style={getStyles("clearIndicator", props)} className={styles.clearButton}>
+      {children}
+    </div>
+  );
+};
+
+// ✅ Fix: Make `style` optional in TypeScript
+const SportsDropdown = ({ style = {} }: { style?: React.CSSProperties }) => {
+  const [selectedOption, setSelectedOption] = useState<OptionType | null>(null);
+  const [inputValue, setInputValue] = useState<string>("");
+  const [mounted, setMounted] = useState<boolean>(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  if (!mounted) return null; // ✅ Prevent SSR mismatches by not rendering until mounted
-
-  // ✅ Function to control what appears in the dropdown
-  const filterOptions = (inputValue) => {
-    if (!inputValue) {
-      return sportsData.filter((option) => option.isCategory);
-    }
-
-    return sportsData
-      .map((sport) => {
-        if (sport.isCategory) {
-          return sport;
-        }
-
-        const matchingClubs = sport.options.filter((club) =>
-          club.label.toLowerCase().includes(inputValue.toLowerCase())
-        );
-
-        return { label: sport.label, options: matchingClubs };
-      })
-      .filter((group) => group.options && group.options.length > 0 || group.isCategory);
-  };
-
-  // ✅ Custom Clear Button
-  const ClearIndicator = (props) => {
-    const { children = "×", getStyles, innerRef, innerProps } = props;
-    return (
-      <div {...innerProps} ref={innerRef} style={getStyles("clearIndicator", props)} className={styles.clearButton}>
-        {children}
-      </div>
-    );
-  };
+  if (!mounted) return null; // ✅ Prevent SSR mismatch
 
   return (
     <div style={style} className={styles.selectContainer}>
@@ -78,7 +86,7 @@ const SportsDropdown = ({ style = {} }: { style?: any }) => {
         classNamePrefix="select"
         value={selectedOption}
         onChange={(option) => setSelectedOption(option || null)}
-        options={filterOptions(inputValue)} // ✅ Ensures filtering only runs after mount
+        options={filterOptions(inputValue, mounted)} // ✅ Ensures filtering runs only after mount
         onInputChange={(value) => setInputValue(value)}
         getOptionLabel={(e) => (e.parentSport ? `${e.label}` : e.label)}
         placeholder="Search by Sport or Club"
