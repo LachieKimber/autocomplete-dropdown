@@ -2,53 +2,28 @@
 
 import React, { useState, useEffect } from "react";
 import Select, { components } from "react-select";
-import styles from "./Dropdown.module.scss"; // ✅ Import SCSS module
+import styles from "./Dropdown.module.scss";
 
 interface OptionType {
   label: string;
   value: string;
   isCategory?: boolean;
   options?: OptionType[];
-  parentSport?: string;
+  parent?: string;
 }
 
-const sportsData: OptionType[] = [
-  { label: "Archery", value: "archery", isCategory: true },
-  {
-    label: "Archery Clubs",
-    value: "archery_clubs", // ✅ Added value to avoid Vercel build error
-    options: [
-      { label: "Armidale Archers", value: "armidale_archers", parentSport: "Archery" },
-      { label: "Bellingen Archers", value: "bellingen_archers", parentSport: "Archery" },
-      { label: "Coast Archers", value: "coast_archers", parentSport: "Archery" },
-    ],
-  },
-  { label: "Golf", value: "golf", isCategory: true },
-  {
-    label: "Golf Clubs",
-    value: "golf_clubs", // ✅ Added value
-    options: [
-      { label: "Sydney Golf Club", value: "sydney_golf_club", parentSport: "Golf" },
-      { label: "Wollombi Archibald Golf Club", value: "wollombi_archibald_golf_club", parentSport: "Golf" },
-    ],
-  },
-  { label: "Tennis", value: "tennis", isCategory: true },
-  {
-    label: "Tennis Clubs",
-    value: "tennis_clubs", // ✅ Added value
-    options: [{ label: "Melbourne Tennis Academy", value: "melbourne_tennis", parentSport: "Tennis" }],
-  },
-];
+interface DropdownProps {
+  data: OptionType[];
+  placeholder?: string;
+  style?: React.CSSProperties;
+}
 
-// ✅ Function to filter sports and clubs
-const filterOptions = (inputValue: string, mounted: boolean): OptionType[] => {
-  if (!mounted) return [];
-
+const filterOptions = (inputValue: string, data: OptionType[]): OptionType[] => {
   if (!inputValue) {
-    return sportsData.filter((option) => option.isCategory);
+    return data.filter((option) => option.isCategory);
   }
 
-  return sportsData
+  return data
     .map((sport) => {
       if (sport.isCategory) return sport;
 
@@ -71,28 +46,29 @@ const ClearIndicator = (props: any) => {
   );
 };
 
-// ✅ Fix: Make `style` optional in TypeScript
-const SportsDropdown = ({ style = {} }: { style?: React.CSSProperties }) => {
+const Dropdown = ({ data, placeholder = "Search...", style = {} }: DropdownProps) => {
   const [selectedOption, setSelectedOption] = useState<OptionType | null>(null);
   const [inputValue, setInputValue] = useState<string>("");
-  const [mounted, setMounted] = useState<boolean>(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  if (!mounted) return null; // ✅ Prevent SSR mismatch
+  // ✅ Avoid hydration mismatch
+  if (!mounted) return null;
 
   return (
     <div style={style} className={styles.selectContainer}>
       <Select
+        key={JSON.stringify(data)} // ✅ Forces re-render when `data` changes
         classNamePrefix="select"
         value={selectedOption}
         onChange={(option) => setSelectedOption(option || null)}
-        options={filterOptions(inputValue, mounted)}
+        options={filterOptions(inputValue, data)}
         onInputChange={(value) => setInputValue(value)}
-        getOptionLabel={(e) => (e.parentSport ? `${e.label}` : e.label)}
-        placeholder="Search by Sport or Club"
+        getOptionLabel={(e) => (e.parent ? `${e.label}` : e.label)}
+        placeholder={placeholder}
         isClearable
         components={{ ClearIndicator }}
       />
@@ -100,4 +76,4 @@ const SportsDropdown = ({ style = {} }: { style?: React.CSSProperties }) => {
   );
 };
 
-export default SportsDropdown;
+export default Dropdown;
