@@ -1,0 +1,553 @@
+[
+  {
+    "label": "Archery",
+    "value": "archery",
+    "isCategory": true
+  },
+  {
+    "label": "Archery Clubs",
+    "value": "archery_clubs",
+    "options": [
+      {
+        "label": "Armidale Archers",
+        "value": "armidale_archers",
+        "parent": "Archery"
+      },
+      {
+        "label": "Bellingen Archers",
+        "value": "bellingen_archers",
+        "parent": "Archery"
+      },
+      {
+        "label": "Coast Archers",
+        "value": "coast_archers",
+        "parent": "Archery"
+      },
+      {
+        "label": "Sydney Olympic Park Archery Club",
+        "value": "sydney_olympic_park_archery_club",
+        "parent": "Archery"
+      }
+    ]
+  },
+  {
+    "label": "Golf",
+    "value": "golf",
+    "isCategory": true
+  },
+  {
+    "label": "Golf Clubs",
+    "value": "golf_clubs",
+    "options": [
+      {
+        "label": "Sydney Golf Club",
+        "value": "sydney_golf_club",
+        "parent": "Golf"
+      },
+      {
+        "label": "Wollombi Archibald Golf Club",
+        "value": "wollombi_archibald_golf_club",
+        "parent": "Golf"
+      }
+    ]
+  },
+  {
+    "label": "Kendo",
+    "value": "kendo",
+    "isCategory": true
+  },
+  {
+    "label": "Kendo Clubs",
+    "value": "kendo_clubs",
+    "options": [
+      {
+        "label": "ANU Kendo Club",
+        "value": "anu_kendo_club",
+        "parent": "Kendo"
+      }
+    ]
+  },
+  {
+    "label": "Cricket",
+    "value": "cricket",
+    "isCategory": true
+  },
+  {
+    "label": "Cricket Clubs",
+    "value": "cricket_clubs",
+    "options": [
+      {
+        "label": "Indian Australian Multicultural Sports Association",
+        "value": "indian_australian_multicultural_sports_association",
+        "parent": "Cricket"
+      },
+      {
+        "label": "CAM Youth Association",
+        "value": "cam_youth_association",
+        "parent": "Cricket"
+      }
+    ]
+  },
+  {
+    "label": "Boccia",
+    "value": "boccia",
+    "isCategory": true
+  },
+  {
+    "label": "Boccia Clubs",
+    "value": "boccia_clubs",
+    "options": [
+      {
+        "label": "Hunter Boccia Club",
+        "value": "hunter_boccia_club",
+        "parent": "Boccia"
+      }
+    ]
+  },
+  {
+    "label": "Judo",
+    "value": "judo",
+    "isCategory": true
+  },
+  {
+    "label": "Judo Clubs",
+    "value": "judo_clubs",
+    "options": [
+      {
+        "label": "Cobar Judo Club",
+        "value": "cobar_judo_club",
+        "parent": "Judo"
+      }
+    ]
+  },
+  {
+    "label": "Wheelchair Basketball",
+    "value": "wheelchair_basketball",
+    "isCategory": true
+  },
+  {
+    "label": "Wheelchair Basketball Clubs",
+    "value": "wheelchair_basketball_clubs",
+    "options": [
+      {
+        "label": "Temora Recreation",
+        "value": "temora_recreation",
+        "parent": "Wheelchair Basketball"
+      }
+    ]
+  },
+  {
+    "label": "Football",
+    "value": "football",
+    "isCategory": true
+  },
+  {
+    "label": "Football Clubs",
+    "value": "football_clubs",
+    "options": [
+      {
+        "label": "Verdi FC",
+        "value": "verdi_fc",
+        "parent": "Football"
+      },
+      {
+        "label": "Bunbury United Soccer Club",
+        "value": "bunbury_united_soccer_club",
+        "parent": "Football"
+      }
+    ]
+  },
+  {
+    "label": "Australian Rules Football (AFL)",
+    "value": "australian_rules_football_(afl)",
+    "isCategory": true
+  },
+  {
+    "label": "Australian Rules Football (AFL) Clubs",
+    "value": "australian_rules_football_(afl)_clubs",
+    "options": [
+      {
+        "label": "Arneham Crows Football CLub",
+        "value": "arneham_crows_football_club",
+        "parent": "Australian Rules Football (AFL)"
+      }
+    ]
+  },
+  {
+    "label": "Motorsport",
+    "value": "motorsport",
+    "isCategory": true
+  },
+  {
+    "label": "Motorsport Clubs",
+    "value": "motorsport_clubs",
+    "options": [
+      {
+        "label": "Acacia HIll MX Club",
+        "value": "acacia_hill_mx_club",
+        "parent": "Motorsport"
+      },
+      {
+        "label": "Wangaratta City Speedway",
+        "value": "wangaratta_city_speedway",
+        "parent": "Motorsport"
+      }
+    ]
+  },
+  {
+    "label": "Athletics",
+    "value": "athletics",
+    "isCategory": true
+  },
+  {
+    "label": "Athletics Clubs",
+    "value": "athletics_clubs",
+    "options": [
+      {
+        "label": "Katherine Athletics Club",
+        "value": "katherine_athletics_club",
+        "parent": "Athletics"
+      },
+      {
+        "label": "Normanton Athletics Club",
+        "value": "normanton_athletics_club",
+        "parent": "Athletics"
+      }
+    ]
+  },
+  {
+    "label": "Croquet",
+    "value": "croquet",
+    "isCategory": true
+  },
+  {
+    "label": "Croquet Clubs",
+    "value": "croquet_clubs",
+    "options": [
+      {
+        "label": "Headland-Buderim Croquet Club",
+        "value": "headland-buderim_croquet_club",
+        "parent": "Croquet"
+      }
+    ]
+  },
+  {
+    "label": "Baseball",
+    "value": "baseball",
+    "isCategory": true
+  },
+  {
+    "label": "Baseball Clubs",
+    "value": "baseball_clubs",
+    "options": [
+      {
+        "label": "Northern Jets Baseball Club and Baseball Association Townsville",
+        "value": "northern_jets_baseball_club_and_baseball_association_townsville",
+        "parent": "Baseball"
+      }
+    ]
+  },
+  {
+    "label": "Equestrian",
+    "value": "equestrian",
+    "isCategory": true
+  },
+  {
+    "label": "Equestrian Clubs",
+    "value": "equestrian_clubs",
+    "options": [
+      {
+        "label": "Far Noth Equestrian Group",
+        "value": "far_noth_equestrian_group",
+        "parent": "Equestrian"
+      }
+    ]
+  },
+  {
+    "label": "Weightlifting",
+    "value": "weightlifting",
+    "isCategory": true
+  },
+  {
+    "label": "Weightlifting Clubs",
+    "value": "weightlifting_clubs",
+    "options": [
+      {
+        "label": "Sunshine Coast Weightlifing Club",
+        "value": "sunshine_coast_weightlifing_club",
+        "parent": "Weightlifting"
+      }
+    ]
+  },
+  {
+    "label": "Orienteering",
+    "value": "orienteering",
+    "isCategory": true
+  },
+  {
+    "label": "Orienteering Clubs",
+    "value": "orienteering_clubs",
+    "options": [
+      {
+        "label": "Range Runners Club",
+        "value": "range_runners_club",
+        "parent": "Orienteering"
+      }
+    ]
+  },
+  {
+    "label": "Badminton",
+    "value": "badminton",
+    "isCategory": true
+  },
+  {
+    "label": "Badminton Clubs",
+    "value": "badminton_clubs",
+    "options": [
+      {
+        "label": "Sturt Badminton Club",
+        "value": "sturt_badminton_club",
+        "parent": "Badminton"
+      }
+    ]
+  },
+  {
+    "label": "AusCycling",
+    "value": "auscycling",
+    "isCategory": true
+  },
+  {
+    "label": "AusCycling Clubs",
+    "value": "auscycling_clubs",
+    "options": [
+      {
+        "label": "Copper Coast BMX Inc.",
+        "value": "copper_coast_bmx_inc.",
+        "parent": "AusCycling"
+      }
+    ]
+  },
+  {
+    "label": "Surf Life Saving",
+    "value": "surf_life_saving",
+    "isCategory": true
+  },
+  {
+    "label": "Surf Life Saving Clubs",
+    "value": "surf_life_saving_clubs",
+    "options": [
+      {
+        "label": "Boat Harbour Life Saving Club",
+        "value": "boat_harbour_life_saving_club",
+        "parent": "Surf Life Saving"
+      },
+      {
+        "label": "Broome Surf Life Saving Club",
+        "value": "broome_surf_life_saving_club",
+        "parent": "Surf Life Saving"
+      }
+    ]
+  },
+  {
+    "label": "Softball",
+    "value": "softball",
+    "isCategory": true
+  },
+  {
+    "label": "Softball Clubs",
+    "value": "softball_clubs",
+    "options": [
+      {
+        "label": "Northern Tasmanian Softball Association",
+        "value": "northern_tasmanian_softball_association",
+        "parent": "Softball"
+      }
+    ]
+  },
+  {
+    "label": "Tennis",
+    "value": "tennis",
+    "isCategory": true
+  },
+  {
+    "label": "Tennis Clubs",
+    "value": "tennis_clubs",
+    "options": [
+      {
+        "label": "Kaniva Community Tennis Centre",
+        "value": "kaniva_community_tennis_centre",
+        "parent": "Tennis"
+      }
+    ]
+  },
+  {
+    "label": "Special Olympics",
+    "value": "special_olympics",
+    "isCategory": true
+  },
+  {
+    "label": "Special Olympics Clubs",
+    "value": "special_olympics_clubs",
+    "options": [
+      {
+        "label": "Melbourne Eastern Range Special Olympics",
+        "value": "melbourne_eastern_range_special_olympics",
+        "parent": "Special Olympics"
+      }
+    ]
+  },
+  {
+    "label": "Rowing",
+    "value": "rowing",
+    "isCategory": true
+  },
+  {
+    "label": "Rowing Clubs",
+    "value": "rowing_clubs",
+    "options": [
+      {
+        "label": "Nagambie Rowing Club",
+        "value": "nagambie_rowing_club",
+        "parent": "Rowing"
+      }
+    ]
+  },
+  {
+    "label": "Surfing",
+    "value": "surfing",
+    "isCategory": true
+  },
+  {
+    "label": "Surfing Clubs",
+    "value": "surfing_clubs",
+    "options": [
+      {
+        "label": "Point Londsdale Boardriders club",
+        "value": "point_londsdale_boardriders_club",
+        "parent": "Surfing"
+      }
+    ]
+  },
+  {
+    "label": "Bowls",
+    "value": "bowls",
+    "isCategory": true
+  },
+  {
+    "label": "Bowls Clubs",
+    "value": "bowls_clubs",
+    "options": [
+      {
+        "label": "Sea Lake Golf Bowls Club",
+        "value": "sea_lake_golf_bowls_club",
+        "parent": "Bowls"
+      },
+      {
+        "label": "Como Bowling Club",
+        "value": "como_bowling_club",
+        "parent": "Bowls"
+      }
+    ]
+  },
+  {
+    "label": "Shooting",
+    "value": "shooting",
+    "isCategory": true
+  },
+  {
+    "label": "Shooting Clubs",
+    "value": "shooting_clubs",
+    "options": [
+      {
+        "label": "Melbourne Gun Club,",
+        "value": "melbourne_gun_club,",
+        "parent": "Shooting"
+      },
+      {
+        "label": "Pistol Shooting",
+        "value": "pistol_shooting",
+        "parent": "Shooting"
+      }
+    ]
+  },
+  {
+    "label": "Basketball",
+    "value": "basketball",
+    "isCategory": true
+  },
+  {
+    "label": "Basketball Clubs",
+    "value": "basketball_clubs",
+    "options": [
+      {
+        "label": "Karratha Cyclones ",
+        "value": "karratha_cyclones_",
+        "parent": "Basketball"
+      }
+    ]
+  },
+  {
+    "label": "Karate",
+    "value": "karate",
+    "isCategory": true
+  },
+  {
+    "label": "Karate Clubs",
+    "value": "karate_clubs",
+    "options": [
+      {
+        "label": "Avon Valley Shotokan",
+        "value": "avon_valley_shotokan",
+        "parent": "Karate"
+      }
+    ]
+  },
+  {
+    "label": "Dance",
+    "value": "dance",
+    "isCategory": true
+  },
+  {
+    "label": "Dance Clubs",
+    "value": "dance_clubs",
+    "options": [
+      {
+        "label": "Para and Ability Dance WA",
+        "value": "para_and_ability_dance_wa",
+        "parent": "Dance"
+      }
+    ]
+  },
+  {
+    "label": "Fencing",
+    "value": "fencing",
+    "isCategory": true
+  },
+  {
+    "label": "Fencing Clubs",
+    "value": "fencing_clubs",
+    "options": [
+      {
+        "label": "UWA Fencing",
+        "value": "uwa_fencing",
+        "parent": "Fencing"
+      }
+    ]
+  },
+  {
+    "label": "Rugby Union",
+    "value": "rugby_union",
+    "isCategory": true
+  },
+  {
+    "label": "Rugby Union Clubs",
+    "value": "rugby_union_clubs",
+    "options": [
+      {
+        "label": "SVNS",
+        "value": "svns",
+        "parent": "Rugby Union"
+      }
+    ]
+  }
+]
