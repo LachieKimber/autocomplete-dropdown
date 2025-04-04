@@ -9,7 +9,7 @@ export default function Page() {
   return (
     <div style={{ maxWidth: "400px", margin: "40px" }}>
       <h2 style={{ display: 'flex' }}>Sports & Clubs<em style={{ marginLeft: 'auto', opacity: 0.5 }}>Test with "Arch"</em></h2>
-      <Dropdown data={sportsData} placeholder="Search for a sport or club..." style={{ marginBottom: "20px" }} />
+      <Dropdown data={sportsData} placeholder="Search for a sport or club..." style={{ marginBottom: "20px" }} allowCreate />
 
       <h2 style={{ display: 'flex' }}>Locations<em style={{ marginLeft: 'auto', opacity: 0.5 }}>Test with "Syd"</em></h2>
       <Dropdown data={locationData} placeholder="Search for a state or suburb..." />

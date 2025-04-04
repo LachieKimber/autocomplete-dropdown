@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useMemo } from "react";
 import Select, { components } from "react-select";
+import CreatableSelect from "react-select/creatable";
 import styles from "./Dropdown.module.scss";
 
 interface OptionType {
@@ -16,6 +17,7 @@ interface DropdownProps {
   data: OptionType[];
   placeholder?: string;
   style?: React.CSSProperties;
+  allowCreate?: boolean;
 }
 
 // Debounce function to delay filtering
@@ -37,24 +39,37 @@ const ClearIndicator = (props: any) => {
   );
 };
 
-const Dropdown = ({ data, placeholder = "Search...", style = {} }: DropdownProps) => {
+// Custom selected item renderer to preserve spacing/styling
+const CustomSingleValue = (props: any) => {
+  const { data } = props;
+  return (
+    <components.SingleValue {...props}>
+      {data.label}
+    </components.SingleValue>
+  );
+};
+
+const Dropdown = ({
+  data,
+  placeholder = "Search...",
+  style = {},
+  allowCreate = false,
+}: DropdownProps) => {
   const [selectedOption, setSelectedOption] = useState<OptionType | null>(null);
   const [inputValue, setInputValue] = useState<string>("");
   const [filteredOptions, setFilteredOptions] = useState<OptionType[]>([]);
   const [isFiltering, setIsFiltering] = useState(false);
   const [isClient, setIsClient] = useState(false);
 
-  // Fix hydration error by ensuring component only renders on client
   useEffect(() => {
     setIsClient(true);
-    setFilteredOptions(data.filter((option) => option.isCategory)); // Load initial categories
+    setFilteredOptions(data.filter((option) => option.isCategory));
   }, [data]);
 
-  // Debounced search handler
   const handleSearch = useMemo(
     () =>
       debounce((searchTerm: string) => {
-        setIsFiltering(true); // Show loading state
+        setIsFiltering(true);
 
         if (!searchTerm) {
           setFilteredOptions(data.filter((option) => option.isCategory));
@@ -62,51 +77,66 @@ const Dropdown = ({ data, placeholder = "Search...", style = {} }: DropdownProps
           return;
         }
 
-        // Simulate processing delay
         setTimeout(() => {
           const results = data
             .map((group) => {
               if (group.isCategory) return group;
 
-              const matchingClubs = group.options?.filter((club) =>
-                club.label.toLowerCase().includes(searchTerm.toLowerCase())
+              const matchingOptions = group.options?.filter((opt) =>
+                opt.label.toLowerCase().includes(searchTerm.toLowerCase())
               );
 
-              return { ...group, options: matchingClubs || [] };
+              return { ...group, options: matchingOptions || [] };
             })
             .filter((group) => group.options?.length || group.isCategory);
 
           setFilteredOptions(results);
-          setIsFiltering(false); // Stop loading state
+          setIsFiltering(false);
         }, 200);
-      }, 300), // Debounce delay
+      }, 300),
     [data]
   );
 
-  // Run the debounced search when `inputValue` changes
   useEffect(() => {
     handleSearch(inputValue);
   }, [inputValue, handleSearch]);
 
-  // Hide dropdown until filtering is complete & results exist
   const showDropdown = isClient && (!isFiltering || filteredOptions.length > 0);
 
-  if (!isClient) return null; // Fix hydration error by ensuring client-side rendering
+  if (!isClient) return null;
+
+  const SelectComponent = allowCreate ? CreatableSelect : Select;
 
   return (
     <div style={style} className={styles.selectContainer}>
       {showDropdown && (
-        <Select
+        <SelectComponent
+          key={JSON.stringify(data)}
           classNamePrefix="select"
           value={selectedOption}
           onChange={(option) => setSelectedOption(option || null)}
-          options={filteredOptions} // Only show results when filtering is done
+          options={filteredOptions}
           onInputChange={(value) => setInputValue(value)}
           getOptionLabel={(e) => (e.parent ? `${e.label}` : e.label)}
           placeholder={placeholder}
           isClearable
-          components={{ ClearIndicator }}
-          isLoading={isFiltering} // Show spinner while filtering
+          components={{
+            ClearIndicator,
+            SingleValue: CustomSingleValue,
+          }}
+          isLoading={isFiltering}
+          formatCreateLabel={(inputValue) => `Add "${inputValue}"`}
+          onCreateOption={
+            allowCreate
+              ? (input) => {
+                  const newOption = {
+                    label: input,
+                    value: input.toLowerCase().replace(/\s+/g, "_"),
+                  };
+                  setSelectedOption(newOption);
+                }
+              : undefined
+          }
         />
       )}
     </div>
